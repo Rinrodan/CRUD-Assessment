@@ -1,0 +1,34 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "Inventory CRUD app back end",
+  "main": "server.js",
+  "scripts": {
+    "BACK-start": "docker start vigorous_murdock && nodemon server.js",
+    "BACK-docker-terminal": "docker exec -it a6840 bash",
+    "KNEX-AllBack": "knex migrate:rollback --all",
+    "KNEX-Migrate-SEED": "npx knex migrate:latest && npx knex seed:run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rinrodan/CRUD-Assessment.git"
+  },
+  "author": "Mario bustillos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rinrodan/CRUD-Assessment/issues"
+  },
+  "homepage": "https://github.com/Rinrodan/CRUD-Assessment#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "dotenv-cli": "^7.3.0",
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3",
+    "pg-promise": "^11.5.4"
+  }
+}
