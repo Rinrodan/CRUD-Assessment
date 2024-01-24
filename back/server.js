@@ -28,15 +28,11 @@ app.get('/users', async (req, res) => {
 	}
   })
 //<<<<<<<<<< GET OnE USER >>>>>>>>>>>>>
-app.get('/users:id', async (req, res) => {
+app.get('/user/:id', async (req, res) => {
   const { id } = req.params
 
 	try {
-	  const requestedUser = await knex('users')
-    .first()
-    where({id},id)
-		
-
+	  const requestedUser = await knex('users').where({id}).first()
     if (requestedUser) {
       res.status(201).json(requestedUser)
     } else {
@@ -44,10 +40,9 @@ app.get('/users:id', async (req, res) => {
       res.status(404).json({message: 'User not found'});
     }
 	} catch (err) {
-	  res.status(500).json({ message: `Failed to retrieve ${reqID}` })
+	  res.status(500).json({ message: `Failed to retrieve ${id}` })
 	}
-  }
-  )
+})
 
 //<<<<<<<<<< ADD USER >>>>>>>>>>>>>
 app.post('/users', async (req, res) => {
@@ -112,8 +107,27 @@ app.post('/users', async (req, res) => {
       } catch (err) {
         res.status(500).json(err.message)
       }
-      
-      })
+})
+
+//<<<<<<<<<< GET OnE ITEm >>>>>>>>>>>>>
+app.get('/item/:id', async (req, res) => {
+  const { id } = req.params
+  const reqID = id;
+
+  try {
+    const requestedItem = await knex('items').where({id}).first()
+    if (requestedItem) {
+      res.status(201).json(requestedItem)
+    } else {
+      // Return a 404 error if the user is not found
+      res.status(404).json({message: `Item _${reqID}_ not found`});
+    }
+  } catch (err) {
+    res.status(500).json({ message: `Failed to retrieve Item` })
+  }
+})
+
+
 //<<<<<<<<<< Add Item >>>>>>>>>>>>>
 app.post('/items', async (req, res) => {
 	const { item_userid, item_name, item_description, item_quantity } = req.body;
