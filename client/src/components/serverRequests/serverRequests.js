@@ -1,6 +1,27 @@
 import React, { useRef, useState } from 'react';
 
 
+export const GetAllItems = () => {
+
+    try {
+        fetch('http://localhost:4400/items', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => res.json())
+
+        .then((items) => { return items })
+        .catch((err) => console.log(err))
+    } catch (err) {
+        console.log('Failed to fetch items')
+    }
+}
+
+
+
+
 export const SingleUser = () => {
     const inputRef = useRef();
 
@@ -14,7 +35,7 @@ export const SingleUser = () => {
             })
             .then((res) => res.json())
     
-            .then((requestedUser) => { console.log(requestedUser) })
+            .then((requestedUser) => { console.log("server request single",requestedUser) })
             .catch((err) => console.log(err))
         } catch (err) {
             console.log('Failed to request single user')
@@ -31,7 +52,7 @@ export const SingleUser = () => {
     return (
         <>
             <input id="numberInput" ref={inputRef}></input>
-            <button onClick={handleClick} class='testButton'>single user request</button>
+            <button onClick={handleClick} className='testButton'>single user request</button>
         </>
     )
 
@@ -71,26 +92,29 @@ export const SingleItemSelect = () => {
             <div id="item-server-request">
                 <input id="numberInput" ref={inputRef}></input>
                 <button onClick={handleClick}>single item request</button>
-            
-            { (itemToView) && <div>
-                <table>
-                    <tr>
-                    <th>
-                        <td>ID</td>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Quantity</td>
-                    </th>    
-                    </tr>
-                    <tr>
-                        <td>{id}</td>
-                        <td>{item_name}</td>
-                        <td>{item_description}</td>
-                        <td>{item_quantity}</td>
-                    </tr>
-
-                </table></div>}
-                </div>
+            </div>
+            { (itemToView) && <div className='item-card'>
+                    
+                    <table className="tg">
+                        <thead>
+                        <tr>
+                            <th className="tg-0lax">ID#</th>
+                            <th className="tg-0lax">Name</th>
+                            <th className="tg-0lax">Description</th>
+                            <th className="tg-0lax">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td className="tg-0lax">{id}</td>
+                            <td className="tg-0lax">{item_name}</td>
+                            <td className="tg-0lax">{item_description}</td>
+                            <td className="tg-0lax">{item_quantity}</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                </div>}
+          
             </>
         )
     

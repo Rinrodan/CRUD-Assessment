@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 });
 
 //#######################  USERS  #################################################
-//<<<<<<<<<< GET ALL USERS >>>>>>>>>>>>>
+//<<<<<<<<<< GET ALL USERS Unauth>>>>>>>>>>>>>
 app.get('/users', async (req, res) => {
 	try {
 	  const users = await knex('users')
@@ -70,6 +70,47 @@ app.post('/users', async (req, res) => {
 	}
   
   })
+  //<<<<<<<<<< DELETE USER >>>>>>>>>>>>>
+  app.delete('/users/delete/:id', async (req, res) => {
+    const { id } = req.params
+  
+    try {
+      await knex('users')
+        .delete()
+        .where('id', id)
+  
+      res.status(200).json({ message: "User Deleted" })
+    } catch (err) {
+      res.status(500).json({ message: "Failed to delete User." })
+    }
+  })
+    //<<<<<<<<<< USER LOGIN >>>>>>>>>>>>>
+  app.post('/login', async (request, response) => {
+    const { username, password } = request.body;
+      try {
+        const data = await knex('users').where({username}).first()
+        if (!data) {
+          response.status(401).json({
+          error: 'No user by that name'
+          });
+        } else {
+          // Use bcrypt to compare the password
+          const isAuth = await bcrypt.compare(password, data.password); 
+          if (isAuth) {
+            delete data.password;
+
+            response.status(200).json( data );			
+          } else {
+            response.status(401).json({
+              error: 'Invalid password',
+            });
+          }}
+            } catch (err) {
+              response.status(500).json({ message: 'Failed to retrieve users data.' })
+            }
+          }
+  )
+ 
 
 
 //#######################  ITEMS  #################################################
@@ -77,37 +118,30 @@ app.post('/users', async (req, res) => {
   app.get('/items', async (req, res) => {
     try {
       const items = await knex('items')
-      .select("*")
+        .select(
+          'id',
+          'item_name',
+          'item_description',
+          'item_quantity'
+          );
+
       res.status(201).json(items)
     } catch (err) {
       res.status(500).json({ message: 'Failed to retrieve items data.' })
     }
     })
 
-    app.post('/users', async (req, res) => {
-      const { first_name, last_name, username, password } = req.body;
-      console.log(req.body)
-      const newUser = {
-        first_name: first_name,
-        last_name: last_name,
-        username: username,
-        password: bcrypt.hashSync(password, 10)
-      }
-      
+    app.get('/inventory', async (req, res) => {
       try {
-        const response = await knex('users')
-        .insert(newUser)
-        .returning('*')
-      
-        console.log('user response: ', response)
-      
-        delete response[0].password
-    
-        res.status(201).json(response[0])
+        const items = await knex('items')
+          .select('*');
+  
+        res.status(201).json(items)
       } catch (err) {
-        res.status(500).json(err.message)
+        res.status(500).json({ message: 'Failed to retrieve items data.' })
       }
-})
+      })
+
 
 //<<<<<<<<<< GET OnE ITEm >>>>>>>>>>>>>
 app.get('/item/:id', async (req, res) => {
@@ -142,12 +176,12 @@ app.post('/items', async (req, res) => {
 	}
   
 	try {
-	  const response = await 
+	  const addedItemResponse = await 
       knex('items')
         .insert(newItem)
         .returning('*');
 
-	  res.status(201).json(response[0])
+	  res.status(201).json(addedItemResponse[0])
 	} catch (err) {
 	  res.status(500).json(err.message)
 	}
