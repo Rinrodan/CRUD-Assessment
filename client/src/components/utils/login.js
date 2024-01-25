@@ -2,14 +2,16 @@ import {useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../App'
 import { Button } from "react-bootstrap";
-
+import useAuth from './useAuth'
 
 
 
 export const LogOut = () => {
     const navigate = useNavigate();
+
     const { userData, updateUserData } = useContext(UserContext);
     const userName = userData.username
+
     const handleLogOut = () => {
          updateUserData({}) 
          navigate("/");

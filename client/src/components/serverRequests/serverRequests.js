@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 
-export const GetAllItems = () => {
+export const GetPublicItems = () => {
 
     try {
         fetch('http://localhost:4400/items', {
@@ -119,3 +119,6 @@ export const SingleItemSelect = () => {
         )
     
     }
+
+
+    

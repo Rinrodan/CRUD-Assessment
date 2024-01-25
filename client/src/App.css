@@ -150,3 +150,92 @@ font-weight: 800;
   background-color: rgb(200, 244, 200);
   padding: 4rem;
 }
+
+.public-inventory-list {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background-color: aqua;
+  text-align: left;
+  min-width: 800px;
+  & li {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  & .public-inventory-header {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  & .name-col{
+    padding-left: 1rem;
+    width: 10%;
+  }
+  & .desc-col{
+    padding-left: 1rem;
+    width: 65%;
+  }
+  & .quantity-col{
+    padding-left: 1rem;
+    width: 10%;
+  }
+  & .button-col{
+    display: flex;
+    flex-direction: row;
+    width: 15rem;
+    height: 2rem;
+    margin: auto;
+    align-content:center;
+  }
+  & button{
+    display: flex;
+    margin: auto;
+  }
+}
+.authorized-inventory-list {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  background-color: aqua;
+  text-align: left;
+  min-width: 800px;
+  & li {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  & .authorized-inventory-header {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  & .employee-id-col{
+    padding-left: 1rem;
+    width: 10%;
+  }
+  & .name-col{
+    padding-left: 1rem;
+    width: 10%;
+  }
+  & .desc-col{
+    padding-left: 1rem;
+    width: 65%;
+  }
+  & .quantity-col{
+    padding-left: 1rem;
+    width: 10%;
+  }
+  & .button-col{
+    display: flex;
+    flex-direction: row;
+    width: 15rem;
+    height: 2rem;
+    margin: auto;
+    align-content:center;
+  }
+  & button{
+    display: flex;
+    margin: auto;
+  }
+}

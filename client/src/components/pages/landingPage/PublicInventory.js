@@ -53,39 +53,32 @@ const PublicInventory = () => {
             // console.log("GetAllItems set state response", inventory);
             // console.log("Show Table state", showTable);
             return (
-                <div className='inventory-table-public'>
-                    <table className="tg">
-                        <thead>
-                            <tr>
-                                <th className="tg-0lax">ID#</th>
-                                <th className="tg-0lax">Name</th>
-                                <th className="tg-0lax">Description</th>
-                                <th className="tg-0lax">Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {inventory.map(item => (
-                                <>
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.item_name}</td>
-                                    <td>
-                                        <div id={item.id + "short"} className="short-description">
-                                            {item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}
-                                        </div>
-                                        <div id={item.id + "long"} className="full-description hidden">
-                                            {item.item_description}
-                                        </div>
-                                    </td>
-                                    <td>{item.item_quantity}</td>
-                                    <button value={item.id} onClick={toggleDescription()}>see full description</button>
-                                </tr>
-
-                                </>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                    <div className='public-inventory-list' title='Public Inventory List' role="list">
+                        <ul>
+                            <li className="public-inventory-header">
+                                <div className='id-col'>ID</div>
+                                <div className='name-col'>ITEM NAME</div>
+                                <div className='desc-col'>DESCRIPTION</div>
+                                <div className='quantity-col'>QUANTITY</div>
+                                <div className='button-col'></div>
+                            </li>
+                        {inventory.map(item => (
+                            <li key={item.id}>
+                            <div className='id-col'>{item.id}</div>
+                            <div className='name-col'>{item.item_name}</div>
+                            <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
+                            <div className='quantity-col'>{item.item_quantity}</div>
+                            <div className='button-col'>
+                                <button value={item.id} onClick={toggleDescription()}>
+                                    see full description
+                                </button>
+                            </div>
+                            </li>
+                        ))}
+                        </ul>
+                    </div>
+                    
+            
             );
         } else {
             console.log("inventory is empty");
@@ -103,7 +96,7 @@ const PublicInventory = () => {
     return (
     <>
         <h1>Inventory</h1>
-        <button onClick={handleClick}>view the inventory</button>
+        <button className="btn btn-primary" onClick={handleClick} role="button">Our Inventory</button>
         {/* <GetAllItems /> */}
         { (showTable) && <InventoryTable />}
 

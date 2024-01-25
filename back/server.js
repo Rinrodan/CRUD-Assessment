@@ -11,6 +11,8 @@ app.use(express.json())
 app.use(cors())
 app.use(bodyParser.json());
 
+
+
 app.get('/', (req, res) => {
   res.send('Successful response.');
 });
@@ -130,7 +132,7 @@ app.post('/users', async (req, res) => {
       res.status(500).json({ message: 'Failed to retrieve items data.' })
     }
     })
-
+//<<<<<<<<<< Get All Items >>>>>>>>>>>>>
     app.get('/inventory', async (req, res) => {
       try {
         const items = await knex('items')

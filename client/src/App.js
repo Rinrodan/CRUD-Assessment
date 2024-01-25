@@ -7,12 +7,17 @@ import LandingPage from './components/pages/landingPage/landingPage';
 import { createContext, useEffect, useState } from 'react';
 import Dashboard from './components/pages/dashboard/dashboardPage';
 
+import { CompanyProvider } from './contexts/CompanyContext';
+import ParentDisplay from './contexts/ParentDisplay';
+
+
 
 export const UserContext = createContext(null);
 
 function App() {
   const [loggedOn, setLoggedOn] = useState(false)
   const [userData, setUserData] = useState({});
+  const [inventory, setInventory] = useState([])
   const [authorizedUser, setAuthorizedUser] = useState(false)
 
   // useEffect(() => {
@@ -26,6 +31,13 @@ function App() {
     setUserData(data);
     setAuthorizedUser(true)
   };
+  const updateInventoryData = (data) => {
+    setInventory(data);
+    
+  };
+
+
+
   function GetFromLocalStorage(key) {
     return JSON.parse(localStorage.getItem(key));
   }
@@ -36,7 +48,7 @@ function App() {
   console.log(" APP.js local storage",myData)
 
   return (
-    <UserContext.Provider value={{ userData, updateUserData }}>
+    <UserContext.Provider value={{ userData, updateUserData, updateInventoryData}}>
       <div className="App">
         <header>
           <Header />
@@ -47,7 +59,9 @@ function App() {
                 <Route path="/dashboard/:username" element={<Dashboard />} />
                   {/* <Route path="/userdashboard/:username/*" element={<UserDashboard />} /> */}
           </Routes>
-        
+          <CompanyProvider>
+            <ParentDisplay />
+          </CompanyProvider>
         </main>
       </div>
     </UserContext.Provider>

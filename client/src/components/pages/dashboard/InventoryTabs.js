@@ -3,6 +3,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import NewItemTab from './tabs/newItemTab';
 import AuthInventory from './tabs/AuthInventory';
 import { createContext, useState } from 'react';
+import EmployeeItems from './tabs/itemsByEmployee';
 
 
 export const InventoryContext = createContext(null);
@@ -55,6 +56,7 @@ function InventoryTabs() {
             </Tab>
             <Tab eventKey="users" title="Items by Employee">
                 Inventory Items By Inventory Manager
+                <EmployeeItems />
             </Tab>
             <Tab eventKey="profile" title="MY ITEMS">
                 Inventory Items By Inventory Manager

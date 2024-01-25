@@ -33,7 +33,7 @@ export const CreateNewItemForm = ({handleNewItemSubmit}) => {
     let charactersLeft = 255 - itemDescription.length
 
 
-      console.log("characters left",charactersLeft)
+    //   console.log("characters left",charactersLeft)
 
     const validateForm = () => {
         if (itemName.length < 4) {

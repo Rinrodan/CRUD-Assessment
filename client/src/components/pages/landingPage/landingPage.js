@@ -1,5 +1,7 @@
 import PublicInventory from "./PublicInventory"
 
+
+
 const LandingPage = () => {
     return(
         <div className="page">

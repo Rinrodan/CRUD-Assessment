@@ -9,6 +9,7 @@ const Dashboard = () => {
     
     return (
         <>
+        <div role="container">
         {(user.first_name) && <div className="page">
             <h1>Welcome Back {user.first_name}</h1>
             <InventoryTabs />
@@ -16,6 +17,7 @@ const Dashboard = () => {
 
 
         </div>}
+        </div>
         </>
     )
 }
