@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+
 const PublicInventory = () => {
     const [inventory, setInventory] = useState([]);
     const [showTable, setShowTable] = useState(false)
@@ -16,10 +17,10 @@ const PublicInventory = () => {
                     })
                     .then((res) => res.json())
                     .then(items => {
-                        setInventory(items) &&
-                        setShowTable(true);
+                        // console.log("fetch public inventory", items)
+                        setInventory(items) 
                     })
-                    // .then(setShowTable(true))
+
                     .catch((err) => console.log(err))
                 } catch (err) {
                     console.log('Failed to fetch items')
@@ -30,7 +31,7 @@ const PublicInventory = () => {
 
     const handleClick = () => {
 
-        InventoryTable();
+        setShowTable(true)
           
     }
     // console.log("Show Table state", showTable);
@@ -49,7 +50,7 @@ const PublicInventory = () => {
 
         if (Array.isArray(inventory) && inventory.length > 0) { 
             // console.log("Show Table state", showTable);
-            setShowTable(true);
+
             // console.log("GetAllItems set state response", inventory);
             // console.log("Show Table state", showTable);
             return (
@@ -81,7 +82,7 @@ const PublicInventory = () => {
             
             );
         } else {
-            console.log("inventory is empty");
+            // console.log("inventory is empty");
             return <p>No items found</p>;
         }
     };
@@ -96,7 +97,7 @@ const PublicInventory = () => {
     return (
     <>
         <h1>Inventory</h1>
-        <button className="btn btn-primary" onClick={handleClick} role="button">Our Inventory</button>
+        <button className="btn btn-primary" onClick={handleClick}>Our Inventory</button>
         {/* <GetAllItems /> */}
         { (showTable) && <InventoryTable />}
 

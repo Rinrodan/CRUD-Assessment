@@ -3,59 +3,34 @@ import Tabs from 'react-bootstrap/Tabs';
 import NewItemTab from './tabs/newItemTab';
 import AuthInventory from './tabs/AuthInventory';
 import { createContext, useState } from 'react';
-import EmployeeItems from './tabs/itemsByEmployee';
+import EmployeeItems from './tabs/itemsByEmployee'
 
 
 export const InventoryContext = createContext(null);
 
-export const GetAllItems = () => {
-
-    function GetFromLocalStorage(key) {
-        return JSON.parse(localStorage.getItem(key));
-      }
-      const token = GetFromLocalStorage("added-items")
-      if(!token){
-        // Navigate('/')
-        console.log("THERE IS NO TOKEN!!!!!!!!!!!")
-      } else {
-    try {
-        fetch('http://localhost:4400/inventory', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => res.json())
-
-        .then((items) => { return items })
-        .catch((err) => console.log(err))
-    } catch (err) {
-        console.log('Failed to fetch items')
-    }
-    }
-}
 
 function InventoryTabs() {
     const [inventory, setInventory] = useState([])
 
 
-    const updateInventoryData = (data) => {
-        setInventory(data);
+    // const updateInventoryData = (data) => {
+    //     setInventory(data);
     
-      };
+    //   };
   return (
 
-    <InventoryContext.Provider value={{ inventory, updateInventoryData }}>
+    // <InventoryContext.Provider value={{ inventory, updateInventoryData }}>
         <Tabs
         defaultActiveKey="ALL"
-        id="uncontrolled-tab-example"
+        id="inventory-tab-container"
         className="mb-3 inventory-tabs"
+        role = "tabs-container"
         >
             <Tab eventKey="ALL" title="ALL">
                 <AuthInventory />
             </Tab>
-            <Tab eventKey="users" title="Items by Employee">
-                Inventory Items By Inventory Manager
+            <Tab eventKey="employee-items" title="Items by Employee" id='employee-items-tab' className='employee-items-tab'>
+           
                 <EmployeeItems />
             </Tab>
             <Tab eventKey="profile" title="MY ITEMS">
@@ -66,7 +41,7 @@ function InventoryTabs() {
             </Tab>
 
         </Tabs>
-    </InventoryContext.Provider>
+    // </InventoryContext.Provider>
   );
 }
 

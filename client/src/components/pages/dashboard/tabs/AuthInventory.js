@@ -1,26 +1,26 @@
-import { Button, Form, InputGroup } from "react-bootstrap"
+
 
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../App";
 
-export const GetAllItems = () => {
+// export const GetAllItems = () => {
 
-    try {
-        fetch('http://localhost:4400/items', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((res) => res.json())
+//     try {
+//         fetch('http://localhost:4400/items', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then((res) => res.json())
 
-        .then((items) => { return items })
-        .catch((err) => console.log(err))
-    } catch (err) {
-        console.log('Failed to fetch items')
-    }
+//         .then((items) => { return items })
+//         .catch((err) => console.log(err))
+//     } catch (err) {
+//         console.log('Failed to fetch items')
+//     }
 
-}
+// }
 
 
 const AuthInventory = () => {
@@ -44,7 +44,7 @@ const AuthInventory = () => {
                         .then((res) => res.json())
                         .then(items => {
                             setInventory(items)
-                                    console.log("auth inventory server response",items)
+                                    // console.log("auth inventory server response",items)
                         })
                         // .then(setShowTable(true))
                         .catch((err) => console.log(err))
@@ -54,6 +54,8 @@ const AuthInventory = () => {
                 };}
                 fetchData();
             }, []);
+            
+// console.log("inventory state=================================", inventory)
     
     const handleClick = () => {
 
@@ -76,7 +78,7 @@ const AuthInventory = () => {
 
         if (Array.isArray(inventory) && inventory.length > 0) { 
             // console.log("Show Table state", showTable);
-            setShowTable(true);
+           
             // console.log("GetAllItems set state response", inventory);
             // console.log("Show Table state", showTable);
             return (
@@ -114,7 +116,7 @@ const AuthInventory = () => {
 
             );
         } else {
-            console.log("inventory is empty");
+            // console.log("inventory is empty");
             return <p>No items found</p>;
         }
     };

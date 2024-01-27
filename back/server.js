@@ -22,7 +22,12 @@ app.get('/', (req, res) => {
 app.get('/users', async (req, res) => {
 	try {
 	  const users = await knex('users')
-		.select("*")
+    .select(
+      'id',
+      'first_name',
+      'last_name',
+      'username'
+      );
     console.log(users)
 	  res.status(201).json(users)
 	} catch (err) {

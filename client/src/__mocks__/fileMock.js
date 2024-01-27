@@ -1,0 +1,1 @@
+odule.exports = 'test-file-stub';

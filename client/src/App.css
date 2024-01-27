@@ -239,3 +239,34 @@ font-weight: 800;
     margin: auto;
   }
 }
+.employee-items-tab {
+  display: flex;
+  width: 100%;
+  height:auto;
+  background-color: red;
+  & .items-list-container {
+    display: flex;
+    margin: auto;
+    width: 90%;
+    height: 80%;
+    background-color: aqua;
+  }
+  & .items-list-empty {
+    display: flex;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    border: dashed 3px black;
+    background-color: white;
+    & div {
+      display: flex;
+      margin: auto;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+    }
+    & .items-list-content {
+      display: flex;
+      background-color: yellow;
+    }
+}

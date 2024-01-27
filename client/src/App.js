@@ -43,9 +43,9 @@ function App() {
   }
   const myData = GetFromLocalStorage("added-items")
 
-  console.log(" APP.js userdata from state context",userData)
-  console.log(" APP.js authorizedUser from state context",authorizedUser)
-  console.log(" APP.js local storage",myData)
+  // console.log(" APP.js userdata from state context",userData)
+  // console.log(" APP.js authorizedUser from state context",authorizedUser)
+  // console.log(" APP.js local storage",myData)
 
   return (
     <UserContext.Provider value={{ userData, updateUserData, updateInventoryData}}>

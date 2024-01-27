@@ -2,7 +2,7 @@ import {useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from '../../App'
 import { Button } from "react-bootstrap";
-import useAuth from './useAuth'
+// import useAuth from './useAuth'
 
 
 
@@ -53,9 +53,9 @@ export const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log("handle Login User Data",data)
+                // console.log("handle Login User Data",data)
                 if (data.username){  
-                    console.log("handle Login", data)
+                    // console.log("handle Login", data)
                     updateUserData(data);
                 const token = {"key":"key"}
                 localStorage.setItem('added-items', AddToLocalStorage(token));
@@ -64,10 +64,10 @@ export const Login = () => {
                 else {alert("YOU HAVE FAILED TO LOG IN")
                 }
             });
-console.log(" handle login userdata from state context",userData)
+// console.log(" handle login userdata from state context",userData)
     };
 
-    console.log("login userdata from state context",userData)
+    // console.log("login userdata from state context",userData)
     
     return (
         <>

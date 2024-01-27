@@ -1,10 +1,10 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 const CompanyContext = createContext();
 
 const CompanyProvider = ({ children }) => {
 
-const [companyName, setCompanyName] = useState("The Data Life");
-const [employee, setEmployee] = useState("Niccolo Lampa");
+const [companyName, ] = useState("The Data Life");
+const [employee, ] = useState("Niccolo Lampa");
 
   return (
     <CompanyContext.Provider

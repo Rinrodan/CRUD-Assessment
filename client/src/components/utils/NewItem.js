@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback,  useState } from "react"
 import { Button, Form, InputGroup } from "react-bootstrap"
 import { useContext } from "react";
 import { UserContext } from "../../App";
@@ -19,8 +19,8 @@ export const CreateNewItemForm = ({handleNewItemSubmit}) => {
         item_quantity:itemQuantity
     }
     const clearForm = () => (
-        setItemName(''),
-        setItemDescription(''),
+        setItemName('') &&
+        setItemDescription('') &&
         setItemQuantity('')
     );
     // useEffect(() => {
