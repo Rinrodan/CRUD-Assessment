@@ -33,9 +33,7 @@ function InventoryTabs() {
            
                 <EmployeeItems />
             </Tab>
-            <Tab eventKey="profile" title="MY ITEMS">
-                Inventory Items By Inventory Manager
-            </Tab>
+
             <Tab eventKey="contact" title="⊕ NEW ITEM">
                 <NewItemTab />
             </Tab>

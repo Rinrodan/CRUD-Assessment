@@ -3,6 +3,10 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../App";
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
 // export const GetAllItems = () => {
 
 //     try {
@@ -28,7 +32,22 @@ const AuthInventory = () => {
     const [showTable, setShowTable] = useState(false)
     const { userData } = useContext(UserContext);
     const user = userData;
+    const [showModal, setShowModal] = useState(false);
+    const [activeModal, setActiveModal] = useState("");
+  
+    // Define a function to handle opening a modal
+    const handleOpenModal = (val) => {
+      setActiveModal(val); // Set the active modal to the given value
+      setShowModal(true); // Set the showModal to true
+    };
+  
+    // Define a function to handle closing a modal
+    const handleCloseModal = () => {
+      setShowModal(false); // Set the showModal to false
+      setActiveModal(""); // Set the active modal to an empty string
+    };
 
+    
 
         useEffect(() => {
             
@@ -53,13 +72,13 @@ const AuthInventory = () => {
                     }
                 };}
                 fetchData();
-            }, []);
+            }, [inventory]);
             
 // console.log("inventory state=================================", inventory)
     
     const handleClick = () => {
 
-        InventoryTable();
+ setInventory([])
           
     }
 
@@ -95,6 +114,8 @@ const AuthInventory = () => {
                                 <div className='quantity-col'>QUANTITY</div>
                                 <div className='button-col'></div>
                             </li>
+                            
+               
                         {inventory.map(item => (
                             <li key={item.id}>
                             <div className='id-col'>{item.id}</div>
@@ -102,11 +123,27 @@ const AuthInventory = () => {
                             <div className='name-col'>{item.item_name}</div>
                             <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                             <div className='quantity-col'>{item.item_quantity}</div>
-                            <div className='button-col'>
-                                <button value={item.id} onClick={toggleDescription()}>
-                                    see full description
-                                </button>
+                            <div className='button-col'></div>
+                            <div className="icon">
+                                <Button className="btn" onClick={() => handleOpenModal("login")}>
+                                login (modal popup)
+                                </Button>
+                                <Modal 
+                                    isOpen={showModal && activeModal === "login"}
+                                    contentLabel="login Modal"
+                                >
+                                <div className="content">
+                                    <button 
+                                        className="close" 
+                                        onClick={handleCloseModal}>
+                                    X
+                                    </button>
+                                    <p>login content in here</p>
+                                </div>
+                                </Modal>
                             </div>
+                            
+
                             </li>
                         ))}
                         </ul>
@@ -132,6 +169,7 @@ const AuthInventory = () => {
     <>
         <h1>Inventory</h1>
         <button onClick={handleClick}>refresh the inventory</button>
+      
         {/* <GetAllItems /> */}
         { <InventoryTable />}
 

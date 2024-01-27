@@ -48,6 +48,7 @@
   height: auto;
   min-height: 80vh;
   width: 100vw;
+  min-width: 788px;
 }
 .testButton {
 display: flex;
@@ -128,8 +129,16 @@ font-weight: 800;
     vertical-align:top
   }
 }
+@media only screen and (max-width: 720px) {
+  .employee-name{
+
+    left:30px;
+    top:200px;
+  }
+}
 .inventory-tabs {
   background-color: rgba(15, 15, 13, 0.431);
+  min-width: 788px;
 }
 
 .tab-content {
@@ -239,17 +248,29 @@ font-weight: 800;
     margin: auto;
   }
 }
+
 .employee-items-tab {
   display: flex;
   width: 100%;
   height:auto;
   background-color: red;
+  & .authorized-inventory-list {
+    background-color: transparent;
+  }
+  & #employee-selector-button{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   & .items-list-container {
     display: flex;
     margin: auto;
+    z-index: 9;
     width: 90%;
     height: 80%;
-    background-color: aqua;
+    overflow: scroll;
+    background-color: #b3ebff;
+
   }
   & .items-list-empty {
     display: flex;
@@ -265,8 +286,21 @@ font-weight: 800;
       font-weight: 800;
     }
     }
-    & .items-list-content {
+    & #employee-filtered-inventory {
       display: flex;
-      background-color: yellow;
+      height: 100%;
     }
+    & .employee-name{
+      display: flex;
+      width: max-content;
+      height: max-content;
+      padding: 0.1rem 0.5rem;
+      background-color: aliceblue;
+      z-index: 99;
+      position: absolute;
+      left:5%;
+      top:210px;
+      box-shadow: 2px 2px 5px black;
+    }
+
 }

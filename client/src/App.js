@@ -12,6 +12,7 @@ import ParentDisplay from './contexts/ParentDisplay';
 
 
 
+
 export const UserContext = createContext(null);
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <Header />
         </header>
         <main>
+ 
           <Routes>
             <Route path="/" element={<LandingPage />}/>
                 <Route path="/dashboard/:username" element={<Dashboard />} />
