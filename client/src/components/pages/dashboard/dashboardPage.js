@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../../../App";
 import InventoryTabs from "./InventoryTabs";
-
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const { userData } = useContext(UserContext);
+    let navigate = useNavigate();
     const user = userData;
+    useEffect(() => {
+        if(user.length <3){
+            navigate('/')
+        }
+    }, [user])
     
     return (
         <>

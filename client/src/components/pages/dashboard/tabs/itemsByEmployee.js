@@ -1,23 +1,9 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../../App';
 import { FormSelect } from 'react-bootstrap';
-
-
-
-// export const DropDownButton = () => {
-
-//   return (
-//     <DropdownButton id="dropdown-basic-button" title="select an employee to view">
-//       <Dropdown.Item href="#/action-1" value="1" alt='Dropdown Item'>Employee 1</Dropdown.Item>
-//       <Dropdown.Item href="#/action-2" role='item'alt='Dropdown Item'>Employee 2</Dropdown.Item>
-//       <Dropdown.Item href="#/action-3" role='item' alt='Dropdown Item'>Employee 3</Dropdown.Item>
-//       <Dropdown.Item href="#/action-3" role='item' alt='Dropdown Item'>Employee 3</Dropdown.Item>
-//     </DropdownButton>
-//   );
-// }
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 
@@ -30,6 +16,7 @@ const EmployeeItems = () => {
     const [usersInventory, setUsersInventory] = useState([])
     const [selectedUser, setSelectedUser] = useState([])
     
+    let navigate = useNavigate();
   
     const handleChange = async (value) => {
         const emptyArray = []
@@ -92,8 +79,8 @@ const EmployeeItems = () => {
                             <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                             <div className='quantity-col'>{item.item_quantity}</div>
                             <div className='button-col'>
-                                <button value={item.id}>
-                                    see full description
+                            <button className="btn" onClick={() => navigate(`/items/:${item.id}`)}>
+                                Edit
                                 </button>
                             </div>
                             </li>

@@ -9,6 +9,7 @@ import Dashboard from './components/pages/dashboard/dashboardPage';
 
 import { CompanyProvider } from './contexts/CompanyContext';
 import ParentDisplay from './contexts/ParentDisplay';
+import EditItemTab from './components/pages/editItemPage';
 
 
 
@@ -59,11 +60,10 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />}/>
                 <Route path="/dashboard/:username" element={<Dashboard />} />
+                <Route path="/items/:itemid" element={<EditItemTab />} />
                   {/* <Route path="/userdashboard/:username/*" element={<UserDashboard />} /> */}
           </Routes>
-          <CompanyProvider>
-            <ParentDisplay />
-          </CompanyProvider>
+   
         </main>
       </div>
     </UserContext.Provider>

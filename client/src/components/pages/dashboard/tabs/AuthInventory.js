@@ -1,10 +1,10 @@
 
-
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../App";
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Navigate } from "react-router-dom";
 
 
 // export const GetAllItems = () => {
@@ -35,16 +35,15 @@ const AuthInventory = () => {
     const [showModal, setShowModal] = useState(false);
     const [activeModal, setActiveModal] = useState("");
   
-    // Define a function to handle opening a modal
     const handleOpenModal = (val) => {
-      setActiveModal(val); // Set the active modal to the given value
-      setShowModal(true); // Set the showModal to true
+      setActiveModal(val); 
+      setShowModal(true);
     };
   
-    // Define a function to handle closing a modal
+ 
     const handleCloseModal = () => {
-      setShowModal(false); // Set the showModal to false
-      setActiveModal(""); // Set the active modal to an empty string
+      setShowModal(false); 
+      setActiveModal(""); 
     };
 
     
@@ -125,22 +124,10 @@ const AuthInventory = () => {
                             <div className='quantity-col'>{item.item_quantity}</div>
                             <div className='button-col'></div>
                             <div className="icon">
-                                <Button className="btn" onClick={() => handleOpenModal("login")}>
-                                login (modal popup)
-                                </Button>
-                                <Modal 
-                                    isOpen={showModal && activeModal === "login"}
-                                    contentLabel="login Modal"
-                                >
-                                <div className="content">
-                                    <button 
-                                        className="close" 
-                                        onClick={handleCloseModal}>
-                                    X
-                                    </button>
-                                    <p>login content in here</p>
-                                </div>
-                                </Modal>
+                                <button className="btn" onClick={() => Navigate(`/items/:${item.id}`)}>
+                                Edit
+                                </button>
+
                             </div>
                             
 

@@ -30,13 +30,13 @@ const handleClose = () => setShow(false);
 const handleShow = () => setShow(true);
 
 const EditItemForm = () => {
-  const [id, setId] = useState(props.item.id); // Use props.item instead of item
-  const [item_userid, setItemUserId] = useState(props.item.item_userid); // Use props.item instead of item
-  const [item_name, setItemName] = useState(props.item.item_name); // Use props.item instead of item
+  const [id, setId] = useState(props.item.id);
+  const [item_userid, setItemUserId] = useState(props.item.item_userid); 
+  const [item_name, setItemName] = useState(props.item.item_name);
   const [item_description, setItemDescription] = useState(
-    props.item.item_description // Use props.item instead of item
+    props.item.item_description 
   );
-  const [item_quantity, setItemQuantity] = useState(props.item.item_quantity); // Use props.item instead of item
+  const [item_quantity, setItemQuantity] = useState(props.item.item_quantity); 
   const [disabled, setDisabled] = useState(true);
 
 
