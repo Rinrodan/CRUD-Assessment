@@ -121,7 +121,7 @@ app.post('/users', async (req, res) => {
 
 
 //#######################  ITEMS  #################################################
-//<<<<<<<<<< Get All Items >>>>>>>>>>>>>
+//<<<<<<<<<< Get All Items for Public Inventory>>>>>>>>>>>>>
   app.get('/items', async (req, res) => {
     try {
       const items = await knex('items')
@@ -170,30 +170,77 @@ app.get('/item/:id', async (req, res) => {
 
 
 //<<<<<<<<<< Add Item >>>>>>>>>>>>>
-app.post('/items', async (req, res) => {
-	const { item_userid, item_name, item_description, item_quantity } = req.body;
-  const max = await knex('items').max('id as max').first();
-	console.log(req.body)
-	const newItem = {
-      id: max.max + 1,
-      item_userid: item_userid,
-      item_name: item_name,
-      item_description:item_description,
-      item_quantity: item_quantity
-	}
-  
-	try {
-	  const addedItemResponse = await 
-      knex('items')
-        .insert(newItem)
-        .returning('*');
+app.post('/items/', async (req, res) => {
+  const { id } = req.params;
+  const { first_name, last_name, email, role_id, user_name } = req.body;
 
-	  res.status(201).json(addedItemResponse[0])
-	} catch (err) {
-	  res.status(500).json(err.message)
-	}
-  
-  })
+  try {
+    let userToUpdate = {};
 
+    if (last_name) userToUpdate.last_name = last_name;
+    if (first_name) userToUpdate.first_name = first_name;
+    if (email) userToUpdate.email = email;
+    if (role_id) userToUpdate.role_id = role_id;
+    if (user_name) userToUpdate.user_name = user_name;
+
+    const updatedUser = await knex('users')
+      .where({ id })
+      .update(userToUpdate)
+      .returning("*");
+
+    if (!updatedUser.length) {
+      return res.status(404).json({ message: "User Not Found!" })
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update user" });
+  }
+});
+app.delete('/item/delete/:id', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    await knex('items')
+      .delete()
+      .where('id', id)
+
+    res.status(200).json({ message: "Item Deleted" })
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete Item." })
+  }
+})
+// **********************    EDIT ITEM     **************************
+  app.patch('/items/:id', async (req, res) => {
+    const { id } = req.params;
+    const { item_name, item_description, item_quantity } = req.body;
+
+    // console.log(req.body)
+  
+  
+    try {
+
+      let itemToUpdate = {};
+
+      if (item_name) itemToUpdate.item_name = item_name;
+      if (item_description) itemToUpdate.item_description = item_description;
+      if (item_quantity) itemToUpdate.item_quantity = item_quantity;
+  
+  
+
+      const updatedItedItemResponse = await knex('items')
+          .where({ id })
+          .update(itemToUpdate)
+          .returning('*');
+            if (!updatedItedItemResponse.length) {
+              return res.status(404).json({ message: "Item Not Found!" })
+            }
+      res.status(201).json(updatedItedItemResponse)
+    } catch (err) {
+      res.status(500).json(err.message)
+    }
+    
+    })
+  
 
 app.listen({port}, () => console.log(`Inventory Server is listening on port ${port}.`));

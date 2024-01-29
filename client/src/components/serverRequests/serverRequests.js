@@ -1,5 +1,7 @@
 // import React, { useRef, useState } from 'react';
 
+import { useState } from "react";
+
 
 // export const GetPublicItems = () => {
 
@@ -58,67 +60,58 @@
 
 // }
 
-// export const SingleItemSelect = () => {
-//  const [itemToView, setItemToView] = useState({})
-//         const inputRef = useRef();
-//     const {id, item_name, item_description, item_quantity} = itemToView
+export const SingleItemFetch = ({id}) => {
+    try {
+        fetch(`http://localhost:4400/item/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((res) => res.json())
 
-//         const handleItemRequest = (id) => {
-//             try {
-//                 fetch(`http://localhost:4400/item/${id}`, {
-//                     method: 'GET',
-//                     headers: {
-//                         'Content-Type': 'application/json'
-//                     }
-//                 })
-//                 .then((res) => res.json())
-        
-//                 .then((requestedItem) => { setItemToView(requestedItem) })
-//                 .catch((err) => console.log(err))
-//             } catch (err) {
-//                 console.log('Failed to request single user')
-//             }
+        .then((requestedItem) => requestedItem)
+        .catch((err) => console.log(err))
+    } catch (err) {
+        console.log('Failed to request single item')
+    }
+}
+// export const FetchInventory = async () => {
+//         try {
+//             fetch('http://localhost:4400/inventory', {
+//                 method: 'GET',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             })
+//             .then(res => res.json())
+//             .then(items => items)
+//         } catch (err) {
+//             console.log('Failed to fetch items')
 //         }
-//         const handleClick = () => {
-//             const itemID = inputRef.current.value;
-//             if (itemID.trim() === '' || isNaN(itemID) || itemID <= 0) {
-//                 alert('Please enter a valid user ID');
-//               } else {
-//                 handleItemRequest(itemID);
-//               }
-//         }
-//         return (
-//             <>
-//             <div id="item-server-request">
-//                 <input id="numberInput" ref={inputRef}></input>
-//                 <button onClick={handleClick}>single item request</button>
-//             </div>
-//             { (itemToView) && <div className='item-card'>
-                    
-//                     <table className="tg">
-//                         <thead>
-//                         <tr>
-//                             <th className="tg-0lax">ID#</th>
-//                             <th className="tg-0lax">Name</th>
-//                             <th className="tg-0lax">Description</th>
-//                             <th className="tg-0lax">Quantity</th>
-//                         </tr>
-//                         </thead>
-//                         <tbody>
-//                         <tr>
-//                             <td className="tg-0lax">{id}</td>
-//                             <td className="tg-0lax">{item_name}</td>
-//                             <td className="tg-0lax">{item_description}</td>
-//                             <td className="tg-0lax">{item_quantity}</td>
-//                         </tr>
-//                         </tbody>
-//                         </table>
-//                 </div>}
-          
-//             </>
-//         )
-    
+//     };
+
+// export const LoggedInUsersInventory = ({id, inventory}) => {
+//     const filterInventoryByUserID = (id) => {
+//         const filteredItems = inventory.filter(filterByUserId);
+//         function filterByUserId(item) {
+//             let requestedID = id;
+//             return item.item_userid == requestedID;  }
+
+ 
 //     }
+//     try {
+//         fetch(`http://localhost:4400/items/${id}`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then((res) => res.json())
 
-
-    
+//         .then((requestedItem) => requestedItem)
+//         .catch((err) => console.log(err))
+//     } catch (err) {
+//         console.log('Failed to request single item')
+//     }
+// }

@@ -21,7 +21,9 @@ function App() {
   const [userData, setUserData] = useState({});
   const [inventory, setInventory] = useState([])
   const [authorizedUser, setAuthorizedUser] = useState(false)
+  const [itemSelectedToEdit ,setItemSelectedToEdit] = useState({})
 
+console.log("useState item selected to edit",itemSelectedToEdit)
   // useEffect(() => {
   //   if(myData[0] === undefined || myData[0] == ""){
   //     setAuthorizedUser(false)
@@ -29,14 +31,9 @@ function App() {
   // }, []);
 
 
-  const updateUserData = (data) => {
-    setUserData(data);
-    setAuthorizedUser(true)
-  };
-  const updateInventoryData = (data) => {
-    setInventory(data);
-    
-  };
+  const updateUserData = (data) => { setUserData(data); setAuthorizedUser(true) }
+  const updateInventoryData = (data) => setInventory(data)
+  const updateItemSelectedToEdit = (data) => setItemSelectedToEdit(data)
 
 
 
@@ -50,7 +47,7 @@ function App() {
   // console.log(" APP.js local storage",myData)
 
   return (
-    <UserContext.Provider value={{ userData, updateUserData, updateInventoryData}}>
+    <UserContext.Provider value={{ userData, itemSelectedToEdit, updateUserData, updateInventoryData, updateItemSelectedToEdit}}>
       <div className="App">
         <header>
           <Header />

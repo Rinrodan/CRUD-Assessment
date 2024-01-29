@@ -9,8 +9,10 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 
 const EmployeeItems = () => {
-    const { userData } = useContext(UserContext);
+    const { userData, updateItemSelectedToEdit } = useContext(UserContext);
     const user = userData;
+
+
     const [employeeData, setEmployeeData] = useState([])
     const [inventory, setInventory] = useState([]);
     const [usersInventory, setUsersInventory] = useState([])
@@ -61,7 +63,7 @@ const EmployeeItems = () => {
                 <div className='items-list-container'>
         
                     <div id='employee-filtered-inventory' className='authorized-inventory-list' title='Employee Inventory List' role="list">
-                        <div className='employee-name'> Items added by: {employeeName}</div>
+                        <div className='employee-name'> Items added by: <span className='h3'> {employeeName}</span></div>
                         <ul>
                             <li className="Authorized-inventory-header">
                                 <div className='id-col'>ID</div>
@@ -79,7 +81,7 @@ const EmployeeItems = () => {
                             <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                             <div className='quantity-col'>{item.item_quantity}</div>
                             <div className='button-col'>
-                            <button className="btn" onClick={() => navigate(`/items/:${item.id}`)}>
+                            <button className="btn" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
                                 Edit
                                 </button>
                             </div>

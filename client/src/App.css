@@ -41,6 +41,9 @@
 .hidden {
   display: none;
 }
+.editModeOn{
+  background-color: yellow;
+}
 .page {
   display: flex;
   flex-direction: column;

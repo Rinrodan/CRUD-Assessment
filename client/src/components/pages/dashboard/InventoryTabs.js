@@ -4,6 +4,7 @@ import NewItemTab from './tabs/newItemTab';
 import AuthInventory from './tabs/AuthInventory';
 import { createContext, useState } from 'react';
 import EmployeeItems from './tabs/itemsByEmployee'
+import MyItemsTab from './tabs/myItemsTab';
 
 
 
@@ -37,6 +38,10 @@ function InventoryTabs() {
 
             <Tab eventKey="new" title="⊕ NEW ITEM">
                 <NewItemTab />
+            </Tab>
+
+            <Tab eventKey="MYITEMS" title="MY ITEMS">
+                <MyItemsTab />
             </Tab>
 
         </Tabs>
