@@ -61,7 +61,11 @@ const MyItemsTab = () => {
             if(myInventory.length > 0){
                 return (
                     <>
-           
+           <div className='items-list-container col'>
+                        <div className='container-sm'>
+                            <button className='btn btn-secondary' onClick={handleRefresh}>refresh your item list</button>
+                        </div>
+                    </div>
                     <div className='items-list-container' id='items-list-container'>
             
                         <div id='employee-filtered-inventory' className='authorized-inventory-list' title='Employee Inventory List' role="list">
@@ -83,7 +87,7 @@ const MyItemsTab = () => {
                                 <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                                 <div className='quantity-col'>{item.item_quantity}</div>
                                 <div className='button-col'>
-                                <button className="btn" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
+                                <button className="btn-alert" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
                                     Edit
                                     </button>
                                 </div>
@@ -100,9 +104,26 @@ const MyItemsTab = () => {
             } else {
                 return (
                     <>
-                    <div className='items-list-container row'>
-                        <div className='items-list-empty row col-lg-12'>
-                            <button className='col' onClick={handleRefresh}>refresh your item list</button>
+                    <div className='items-list-container container'>
+                    <div className='container-sm row'>
+                            <button className='btn btn-secondary' onClick={handleRefresh}>refresh your item list</button>
+                        </div>
+                    </div>
+   
+                    <div className='items-list-container' id='items-list-container'>
+            
+                        <div id='employee-filtered-inventory' className='authorized-inventory-list' title='Employee Inventory List' role="list">
+                            <div className='employee-name'> Items added by: <span className='h3'> You</span></div>
+                            <ul>
+                                <li className="Authorized-inventory-header">
+                                    <div className='id-col'>ID</div>
+                                    <div className='employee-id-col'>Employee_ID</div>
+                                    <div className='name-col'>ITEM_NAME</div>
+                                    <div className='desc-col'>DESCRIPTION</div>
+                                    <div className='quantity-col'>QUANTITY</div>
+                                    <div className='button-col'></div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     </>

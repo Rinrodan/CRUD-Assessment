@@ -62,7 +62,7 @@ const EditItem = () => {
         // console.log("NEW NAME::::::::::::::::::::::: ",itemName)
         const handleDelete = () => {
             setSelectedItem([])
-            fetch(`http://localhost:4400/items/delete/${selectedItem.id}`, {
+            fetch(`http://localhost:4400/item/delete/${selectedItem.id}`, {
                 method: 'DELETE',
                 
                 headers: {'Content-Type': 'application/json'},

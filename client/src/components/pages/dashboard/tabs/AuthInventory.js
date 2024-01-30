@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../../App";
 
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+
 import { Navigate } from "react-router-dom";
 
 
