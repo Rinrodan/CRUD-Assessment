@@ -12,6 +12,8 @@ import EditItemInModal from "./editItemInModal";
 
 
 
+
+
 const AuthInventoryWithModal = () => {
 
     const { userData, itemSelectedToEdit, updateItemSelectedToEdit} = useContext(UserContext);
@@ -37,6 +39,13 @@ console.log("inputID from modal Button",inputID)
         setLgShow(false)
 
     }
+
+
+    const handleRefreshList = () => {
+
+        setInventory([])
+                 
+           }
 
     console.log("CONTEXT item selected",itemSelectedToEdit)
 
@@ -86,15 +95,11 @@ console.log("inputID from modal Button",inputID)
                     }
                 };}
                 fetchData();
-            }, []);
+            }, [itemEditContext]);
             
 // console.log("inventory state=================================", inventory)
     
-    const handleClick = () => {
 
- setInventory([])
-          
-    }
 
     function ExampleModal() {
 
@@ -115,7 +120,7 @@ console.log("inputID from modal Button",inputID)
               </Modal.Header>
               <Modal.Body>
 
-              <EditItemInModal />
+              <EditItemInModal closeModal={handleClose}/>
 
               </Modal.Body>
               <Modal.Footer>
@@ -144,18 +149,22 @@ console.log("inputID from modal Button",inputID)
                     <table className="modal-inventory-list-auth table table-striped">
                         <thead>
                             <tr>
-                                <th className="type-column">Item ID:</th>
-                                <th className="type-column">User ID:</th>
-                                <th className="type-column">Name:</th>
-                                <th className="type-column">Full Description:</th>
-                                <th className="type-column">Quantity:</th>
-                                <th className="type-column"></th>
+                                
+           
                             </tr>
                         </thead>
                         <tbody>
+                            <tr className="authorized-inventory-header">
+                                <td className="employee-id-col">Item ID:</td>
+                                <td className="employee-id-col">User ID:</td>
+                                <td className="name-col">Name:</td>
+                                <td className="desc-col">Full Description:</td>
+                                <td className="quantity-col">Quantity:</td>
+                                <td></td>
+                            </tr>
                         {inventory.map(item => ( 
                             <tr>
-                                <td className="data-column">{item.id}</td>
+                                <td className="quantity-col">{item.id}</td>
                                 <td className="employee-id-col">{item.item_userid}</td>
                                 <td className="name-col">{item.item_name}</td>
                                 <td className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</td>
@@ -186,8 +195,9 @@ console.log("inputID from modal Button",inputID)
 
     return (
     <>
+
         <h1>Inventory</h1>
-        <button onClick={handleClick}>refresh the inventory</button>
+        <Button variant="info" onClick={handleRefreshList}>refresh the inventory</Button>
         {/* <ItemModal /> */}
         <ExampleModal />
         {/* <GetAllItems /> */}

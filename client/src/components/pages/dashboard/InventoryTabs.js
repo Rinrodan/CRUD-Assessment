@@ -47,12 +47,12 @@ function InventoryTabs() {
             <Tab eventKey="my-items" title="MY ITEMS" className='page'>
                 <MyItemsTab />
             </Tab>
-            <Tab eventKey="public" title="Public Inventory" className='page'>
+            {/* <Tab eventKey="public" title="Public Inventory" className='page'> */}
                 {/* <PublicInventoryAccordion /> */}
                 {/* <AuthInventoryAccordion /> */}
               
-                <AuthInventoryWithModal/>
-            </Tab>
+                {/* <AuthInventoryWithModal/> */}
+            {/* </Tab> */}
 
         </Tabs>
     // </InventoryContext.Provider>

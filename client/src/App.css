@@ -256,12 +256,13 @@ font-weight: 800;
   display: flex;
   width: 100%;
   height:auto;
-  background-color: red;
+  background-color: white;
   & .authorized-inventory-list {
     background-color: transparent;
   }
   & #employee-selector-button{
     display: flex;
+    font-weight: bolder;
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
@@ -366,22 +367,18 @@ font-weight: 800;
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  background-color: aqua;
   text-align: left;
   min-width: 800px;
-  & li {
+  & .authorized-inventory-header {
     display: flex;
     flex-direction: row;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  & .authorized-inventory-header {
+    width: 100%;
     font-size: 1rem;
     font-weight: 700;
   }
   & .employee-id-col{
-    padding-left: 1rem;
-    width: 10%;
+    padding-left: 0rem;
+    width: 50px;
   }
   & .name-col{
     padding-left: 1rem;
@@ -393,7 +390,7 @@ font-weight: 800;
   }
   & .quantity-col{
     padding-left: 1rem;
-    width: 10%;
+    width: 50px;
   }
   & .button-col{
     display: flex;
@@ -415,7 +412,7 @@ font-weight: 800;
   
   & .tbody{
     width: 100%;
-    background-color: #b3ebff;
+
 
     }
     & .type-column {
@@ -423,23 +420,23 @@ font-weight: 800;
       width: 150px;
       text-align: right;
       font-weight: bold;
-      background-color: rgb(215, 100, 84);
+margin: auto;
 
     }
     & .data-column {
       display: flex;
       margin: auto;
       padding-left: 1rem;
-      max-height: 40px;
+      height: 100%;
       text-align: left;
-      padding: 0px;
-      background-color: rgb(50, 209, 29);
+      padding: 1px;
       & input {
         display: flex;
         flex-direction: column;
-        width: 100%;
-        background-color: violet;
+      
+
       }
+
       & .input-description{
         display: flex;
         flex-direction: column;
@@ -452,13 +449,21 @@ font-weight: 800;
         overflow: scroll;
         height: 90px;
         grid-auto-rows: auto;
-        background-color: rgb(24, 207, 207);
+
       }
     }
-
+    & .no-edit{
+      padding-top: 8px;
+      padding-bottom: 8px;
+      margin-left: 0px;
+    }
+    & .smaller {
+      width: 200px;
+      background-color: turquoise;
+    }
     & .full-description {
       height: 100px;
-      background-color: rgb(217, 179, 67);
+
     }
           
 }

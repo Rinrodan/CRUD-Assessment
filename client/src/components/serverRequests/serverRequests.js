@@ -1,6 +1,7 @@
 // import React, { useRef, useState } from 'react';
 
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../../App";
 
 
 // export const GetPublicItems = () => {
@@ -115,3 +116,35 @@ export const SingleItemFetch = ({id}) => {
 //         console.log('Failed to request single item')
 //     }
 // }
+
+// const ServerRequests = () => {
+
+    // export const FetchItemToEdit = async (id) => {
+    //     const { userData, itemSelectedToEdit, updateItemSelectedToEdit} = useContext(UserContext);
+    //     const itemEditContext = itemSelectedToEdit
+    //     const user = userData;
+    //     const inputID = id
+    //     try {
+    //         fetch(`http://localhost:4400/item/${inputID}`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
+    //         .then((res) => res.json())
+    //         .then(requestedItem => {
+    //             updateItemSelectedToEdit(requestedItem)
+    
+    //                     // console.log("auth inventory server response",requestedItem)
+    //         })
+    //         // .then(setShowTable(true))
+    //         .catch((err) => console.log(err))
+    //     } catch (err) {
+    //         console.log('Failed to fetch items')
+    //     }
+    //  }
+
+   
+
+
+// export default ServerRequests

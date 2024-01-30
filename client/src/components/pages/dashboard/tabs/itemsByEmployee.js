@@ -3,6 +3,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../../App';
 import { FormSelect } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 
@@ -81,9 +82,9 @@ const EmployeeItems = () => {
                             <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                             <div className='quantity-col'>{item.item_quantity}</div>
                             <div className='button-col'>
-                            <button className="btn" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
+                            <Button className="bg-primary" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
                                 Edit
-                                </button>
+                                </Button>
                             </div>
                             </li>
                         ))}
@@ -180,7 +181,11 @@ const EmployeeItems = () => {
             
             <label>
                
-            <FormSelect defaultValue="default" onChange={(e) => handleChange(e.target.value)} id='employee-selector-button'>
+            <FormSelect 
+                defaultValue="default" 
+                id='employee-selector-button'
+                className='bg-primary text-light Bold text'
+                onChange={(e) => handleChange(e.target.value)} >
                 <option>Select an Employee to View</option>
             
                 {employeeData.map(({id, first_name, last_name }, index) => {

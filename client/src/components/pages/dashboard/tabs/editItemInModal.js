@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import React from "react";
-
+import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../App";
 
 
 
 
-const EditItemInModal = () => {
+const EditItemInModal = (props) => {
 let navigate = useNavigate();
 const NoItemToEdit = {
     id:999,
@@ -81,6 +81,7 @@ const Table = () => {
         setItemQuantity(item.item_quantity)
         setEditMode(false)
         setShowSaveButton(false)
+        props.closeModal()
     }
     const handleSave = () => {
         setShowSaveAlert(true)
@@ -103,7 +104,7 @@ const Table = () => {
 
         })
         .then(res => res.json())
-        .then(updatedItedItemResponse => {setSelectedItem(updatedItedItemResponse[0]); navigate(`/dashboard/${user.username}`)})
+        .then(updatedItedItemResponse => {setSelectedItem(updatedItedItemResponse[0]);updateItemSelectedToEdit([]);props.closeModal(); navigate(`/dashboard/${user.username}`)})
     }
     
 
@@ -114,7 +115,7 @@ return (
                     <button onClick={() => setShowAlert(false)} className="btn btn-dark">cancel</button>
                     <button onClick={handleDelete} className="btn btn-warning">confirm</button>
                 </div>}
-        {(showSaveAlert) && <div className="bg-danger p-4">
+        {(showSaveAlert) && <div className="bg-danger p-2 rounded-lg z-index-1 position-absolute top-50 start-50 translate-middle">
             <p>confirm save</p>
             <button onClick={() => setShowSaveAlert(false)} className="btn btn-dark">cancel</button>
             <button onClick={submitEditsToItem} className="btn btn-warning">confirm</button>
@@ -130,47 +131,64 @@ return (
         <tbody>
             <tr>
                 <td className="type-column">id</td>
-                <td className="data-column">{selectedItem.id}</td></tr>
+                <td className="data-column no-edit">{selectedItem.id}</td></tr>
             <tr>
                 <td className="type-column">user id</td>
-                <td className="data-column">{selectedItem.item_userid}</td></tr>
+                <td className="data-column no-edit">{selectedItem.item_userid}</td></tr>
                 <tr>{editMode 
                     ? <>
                         <td className="type-column">Name</td>
                         <td className="data-column">
-                            <input value={itemName} onChange={(e) => {setItemName(e.target.value); setShowSaveButton(true)}} className="editModeOn"></input>
+                            <input 
+                                className="editModeOn smaller" 
+                                value={itemName} onChange={(e) => {setItemName(e.target.value); setShowSaveButton(true)}} required>
+                            </input>
                         </td>
                     </> 
                     : <>
                         <td className="type-column">Name</td>
-                        <td className="data-column">{selectedItem.item_name}</td>
+                        <td className="data-column no-edit">{selectedItem.item_name}</td>
                     </>}
                 </tr>
                 <tr>{editMode 
                     ? <>
                         <td className="type-column full-description">Full Description</td>
                         <td className="data-column">
-                            <textarea className="editModeOn input-description" rows="2" cols="1" wrap="hard" value={itemDescription} onChange={(e) => {setItemDescription(e.target.value); setShowSaveButton(true)}} ></textarea>
+                            <textarea 
+                                className="editModeOn input-description" 
+                                rows="2" 
+                                cols="1" 
+                                wrap="hard" 
+                                value={itemDescription} 
+                                onChange={(e) => {setItemDescription(e.target.value); setShowSaveButton(true)}} required>
+                            </textarea>
                         </td>
                     </>
                     : <>
                         <td className="type-column full-description">Full Description</td>
-                        <td className="data-column">{selectedItem.item_description}</td>
+                        <td className="data-column ">{selectedItem.item_description}</td>
                     </>}
                 </tr>
                 <tr>{editMode 
                     ? <>
                         <td className="type-column">quantity</td>
-                        <td className="data-column">
-                            <input value={itemQuantity} onChange={(e) => {setItemQuantity(e.target.value); setShowSaveButton(true)}} className="editModeOn"></input>
+                        <td className="data-column ">
+                            <input  
+                                className="editModeOn smaller" 
+                                required value={itemQuantity} 
+                                onChange={(e) => {setItemQuantity(e.target.value); setShowSaveButton(true)}}>
+                            </input>
                         </td> 
                     </>
                     : <>
                         <td className="type-column">quantity</td>
-                        <td className="data-column">{selectedItem.item_quantity}</td>
+                        <td className="data-column no-edit">{selectedItem.item_quantity}</td>
                     </>}
                 </tr>
-                <tr> {editMode 
+                
+                <tr> 
+                
+                    {editMode 
                     ? <>
                         <td className="type-column"></td>
                         <td className="">
@@ -182,17 +200,21 @@ return (
                             <button className="btn btn-danger" onClick={() => setShowAlert(true)}>Delete</button>
                         </td>
                         <td>
+                            
                             <button className="btn btn-info float-end" onClick={() => setEditMode(true)}>edit</button>
                         </td>
                         
                     </>}
-                {showSaveButton 
-                    ? <>
-                        <button onClick={handleSave} id="save-button">save</button>
-                    </> 
-                    : ""}
+         
                 </tr> 
-      
+                <tr>
+                    <td>
+                        {showSaveButton 
+                                        ? <Button className="bg-success position-absolute bottom-0 start-50 translate-middle-x" onClick={handleSave} id="save-button">save</Button>
+                                    : ""}
+                    </td>
+                    <td></td>
+                </tr>
 
 
          
