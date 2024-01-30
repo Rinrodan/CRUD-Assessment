@@ -1,11 +1,11 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import Dashboard from '../components/pages/dashboard/dashboardPage';
+import Dashboard from '../components/pages/dashboard';
 import { UserContext } from '../App';
 import { BrowserRouter } from 'react-router-dom';
 import Header from '../components/utils/Header';
-import AuthInventory from '../components/pages/dashboard/tabs/AuthInventory';
-import InventoryTabs from '../components/pages/dashboard/InventoryTabs';
+import AuthInventoryWithModal from '../components/pages/dashboard/tabs/AuthInventoryWithModal';
+import InventoryTabs from '../components/pages/dashboard/tabs';
 
 const userData = {
   id: 1,
@@ -97,7 +97,7 @@ describe('Dashboard Page', () => {
       render(
         <BrowserRouter>
           <UserContext.Provider value={{ userData }}>
-            <AuthInventory />
+            <AuthInventoryWithModal />
           </UserContext.Provider>
         </BrowserRouter>
       );

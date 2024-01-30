@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../../App";
 
 import { Navigate, useNavigate } from 'react-router-dom';
-import InventoryTabs from "./tabs/inventoryTabs";
+import InventoryTabs from "./tabs/index";
 
 
 

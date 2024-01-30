@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import LandingPage from '../components/pages/landingPage/landingPage';
-import PublicInventory from '../components/pages/landingPage/PublicInventory';
+import LandingPage from '../components/pages/landingPage';
+import PublicInventoryAccordion from '../components/pages/landingPage/PublicInventoryAccordion';
 import mockInventory from '../__mocks__/mockInventory.json'
 import { fetchItemsMock } from '../__mocks__/fetchMocks';
 import Header from '../components/utils/Header';
@@ -50,13 +50,17 @@ describe('Landing Page', () => {
         const button = screen.getByText('Our Inventory');
         expect(button).toBeInTheDocument();
     });
-
+    it('renders public inventory list', async() => {
+      const list = await screen.findByRole('list');
+      expect(list).toBeInTheDocument();
+  });
     
 
     it('renders Login', async () => {
   
         waitFor(() => expect(getByText("sign-in")).toBeInTheDocument());
     });
+    
 });
 describe('Mocking', () => {
     it('renders auth inventory with mock',  async () => {
@@ -66,14 +70,15 @@ describe('Mocking', () => {
       render(
         <BrowserRouter>
           <UserContext.Provider value={{ userData }}>
-            <PublicInventory />
+            <PublicInventoryAccordion />
           </UserContext.Provider>
         </BrowserRouter>
       );
-      const button = screen.getByRole('button', {  name: /our inventory/i})
-      fireEvent.click(button)
+      const list = await screen.findByRole('list');
+      expect(list).toBeInTheDocument();
 
-      const itemName = await screen.findByText(/Test Name Two/i);
-      expect(itemName).toBeInTheDocument();
+      const fakeItemName = screen.findAllByText(/Test Name Two/i);
+      waitFor(() => expect(fakeItemName).toBeInTheDocument());
+      
     });
   });

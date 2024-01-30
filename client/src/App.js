@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/utils/Header';
-import LandingPage from './components/pages/landingPage/landingPage';
+import LandingPage from './components/pages/landingPage/index';
 import { createContext, useEffect, useState } from 'react';
 
 

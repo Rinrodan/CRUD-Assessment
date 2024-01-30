@@ -1,9 +1,9 @@
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import NewItemTab from './tabs/newItemTab';
-import EmployeeItems from './tabs/itemsByEmployee';
-import MyItemsTab from './tabs/myItemsTab';
-import AuthInventoryWithModal from './tabs/AuthInventoryWithModal';
+import NewItemTab from './newItemTab';
+import EmployeeItems from './itemsByEmployee';
+import MyItemsTab from './myItemsTab';
+import AuthInventoryWithModal from './AuthInventoryWithModal';
 
 
 function InventoryTabs() {

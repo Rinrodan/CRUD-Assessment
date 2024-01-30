@@ -148,6 +148,27 @@ app.post('/users', async (req, res) => {
         res.status(500).json({ message: 'Failed to retrieve items data.' })
       }
       })
+//!!!!!!!!!!!!!!!!!!!!!!!  get items by userid !!!!!!!!!!!!!!!!!!!!!!!!
+app.get('/inventory/:id', async (req, res) => {
+  const { id } = req.params
+  const reqID = id;
+
+  try {
+    const usersItems = await knex('items')
+    .where({'item_userid': reqID})
+    .select('*')
+    if (usersItems.length > 0) {
+      res.status(201).json(usersItems)
+    } else {
+      // Return a 404 error if the user is not found
+      res.status(404).json({message: `Items made by employee number: _${reqID}_ not found`});
+    }
+  } catch (err) {
+    res.status(500).json({ message: `Failed to retrieve Items` })
+  }
+})
+
+
 
 
 //<<<<<<<<<< GET OnE ITEm >>>>>>>>>>>>>

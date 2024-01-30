@@ -2,15 +2,16 @@
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../../../../App';
-import { FormSelect } from 'react-bootstrap';
+import { FormSelect, Modal } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { Navigate, useNavigate } from 'react-router-dom';
+import EditItemInModal from '../../../utils/editItemInModal';
 
 
 
 
 const EmployeeItems = () => {
-    const { userData, updateItemSelectedToEdit } = useContext(UserContext);
+    const { userData,itemSelectedToEdit, updateItemSelectedToEdit } = useContext(UserContext);
     const user = userData;
 
 
@@ -18,7 +19,19 @@ const EmployeeItems = () => {
     const [inventory, setInventory] = useState([]);
     const [usersInventory, setUsersInventory] = useState([])
     const [selectedUser, setSelectedUser] = useState([])
-    
+    const [lgShow, setLgShow] = useState(false);
+
+    const itemEditContext = itemSelectedToEdit
+   
+
+    const handleSetItem = (e) => {
+        const inputID = e.target.value
+        fetchItemToEdit(inputID)
+        setLgShow(true)
+        // console.log("inputID from modal Button",inputID)
+    }
+    const handleClose = () => setLgShow(false)
+
     let navigate = useNavigate();
   
     const handleChange = async (value) => {
@@ -61,7 +74,7 @@ const EmployeeItems = () => {
             return (
                 <>
        
-                <div className='items-list-container'>
+                <div className='items-list-container slide-in-left'>
         
                     <div id='employee-filtered-inventory' className='authorized-inventory-list' title='Employee Inventory List' role="list">
                         <div className='employee-name'> Items added by: <span className='h3'> {employeeName}</span></div>
@@ -82,8 +95,8 @@ const EmployeeItems = () => {
                             <div className='desc-col'>{item.item_description.length > 100 ? item.item_description.slice(0,100) + "..." : item.item_description}</div>
                             <div className='quantity-col'>{item.item_quantity}</div>
                             <div className='button-col'>
-                            <Button className="bg-primary" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
-                                Edit
+                            <Button variant="primary" value={item.id} onClick={handleSetItem}>
+                                    View
                                 </Button>
                             </div>
                             </li>
@@ -215,12 +228,62 @@ const EmployeeItems = () => {
           setUsersInventory(filteredItems)
     }
 
+
+    const fetchItemToEdit = async (id) => {
+        const inputID = id
+        try {
+            fetch(`http://localhost:4400/item/${inputID}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then((res) => res.json())
+            .then(requestedItem => {
+                updateItemSelectedToEdit(requestedItem)
+    
+                        // console.log("auth inventory server response",requestedItem)
+            })
+            // .then(setShowTable(true))
+            .catch((err) => console.log(err))
+        } catch (err) {
+            console.log('Failed to fetch items')
+        }
+     }
+     function ViewEditDeleteModal() {
+        return (
+          <>
+            <Modal
+                size="lg"
+                show={lgShow}
+                onHide={() => setLgShow(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+                keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>View - Edit - Delete</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+
+              <EditItemInModal closeModal={handleClose}/>
+
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                
+              </Modal.Footer>
+            </Modal>
+          </>
+        );
+      }
 // console.log("call filtered function with id 1",filterInventoryByUserID(1))
 // console.log("employeeData from state", employeeData)
     
     return (
         <>
-
+<ViewEditDeleteModal />
             <DropDown />
             <FilteredInventory />
         </>

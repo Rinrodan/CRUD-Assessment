@@ -129,7 +129,7 @@ const AuthInventoryWithModal = () => {
                             <td></td>
                         </tr>
                     {inventory.map(item => ( 
-                        <tr>
+                        <tr key={item.id}>
                             <td className="quantity-col">{item.id}</td>
                             <td className="employee-id-col">{item.item_userid}</td>
                             <td className="name-col">{item.item_name}</td>
