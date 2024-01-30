@@ -226,4 +226,4 @@ const EmployeeItems = () => {
         </>
     )
 }
-export default EmployeeItems
+export default EmployeeItems;

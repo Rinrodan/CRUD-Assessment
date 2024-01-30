@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../../App";
+import { UserContext } from "../../App";
+
 
 
 
@@ -49,18 +50,10 @@ const Table = () => {
     }, [itemEditContext])
 
 
-// console.log("consuming context at iditItem: ::::::::::", itemEditContext)
-// console.log("editItem useState item: ::::::::::", item)
-// console.log("editItem useState selectedItem: ::::::::::", selectedItem)
-
-    // const updateToItem = {
-    //     id:selectedItem.id,
-    //     item_userid:selectedItem.item_userid,
-    //     item_name:itemName,
-    //     item_description:itemDescription,
-    //     item_quantity:itemQuantity
-    // }
-    // console.log("NEW NAME::::::::::::::::::::::: ",itemName)
+            // console.log("consuming context at iditItem: ::::::::::", itemEditContext)
+            // console.log("editItem useState item: ::::::::::", item)
+            // console.log("editItem useState selectedItem: ::::::::::", selectedItem)
+            // console.log("NEW NAME::::::::::::::::::::::: ",itemName)
     const handleDelete = () => {
         setSelectedItem([])
         fetch(`http://localhost:4400/item/delete/${selectedItem.id}`, {
@@ -70,7 +63,7 @@ const Table = () => {
 
             })
             .then(res => res.json())
-            .then(() => {alert("Deleted"); navigate(`/dashboard/${user.username}`)})
+            .then(() => {alert("Deleted"); props.closeModal(); navigate(`/dashboard/${user.username}`)})
         
         setShowAlert(false)
     }
@@ -111,10 +104,10 @@ const Table = () => {
 return (
     <>
         {(showAlert) && <div className="bg-danger p-4">
-                    <p>confirm delete</p>
-                    <button onClick={() => setShowAlert(false)} className="btn btn-dark">cancel</button>
-                    <button onClick={handleDelete} className="btn btn-warning">confirm</button>
-                </div>}
+            <p>confirm delete</p>
+            <button onClick={() => setShowAlert(false)} className="btn btn-dark">cancel</button>
+            <button onClick={handleDelete} className="btn btn-warning">confirm</button>
+        </div>}
         {(showSaveAlert) && <div className="bg-danger p-2 rounded-lg z-index-1 position-absolute top-50 start-50 translate-middle">
             <p>confirm save</p>
             <button onClick={() => setShowSaveAlert(false)} className="btn btn-dark">cancel</button>

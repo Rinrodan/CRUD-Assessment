@@ -72,42 +72,42 @@ export const CreateNewItemForm = ({handleNewItemSubmit}) => {
     return (
         <>
         <div className="new-item-card col-lg-8">
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Item Name</InputGroup.Text>
-                        <Form.Control
-                        placeholder="Username"
-                        aria-label="Username"
-                        aria-describedby="basic-addon1"
-                        value={itemName}
-                        onChange={(e) => setItemName(e.target.value)}
-                        />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1 item-description">Item Description </InputGroup.Text>
-                        <Form.Control
-                        as="textarea"
-                        placeholder="Max 255 characters"
-                        aria-label="Description"
-                        aria-describedby="basic-addon1"
-                        value={itemDescription}
-                        onChange={(e) => setItemDescription(e.target.value)}
-                        />
-                        <p></p>
-                    </InputGroup>
-                    <span > <div className="charactersLeft">{charactersLeft}</div> characters left</span>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Quantity</InputGroup.Text>
-                        <Form.Control
-                        placeholder="Quantity"
-                        aria-label="Quantity"
-                        aria-describedby="basic-addon1"
-                        value={itemQuantity}
-                        onChange={(e) => setItemQuantity(e.target.value)}
-                        />
-                    </InputGroup>
-                    <Button className="" onClick={() => { validateForm() }}>Submit</Button>
-                    <button className="btn btn-danger col col-sm-2 m-1" onClick={clearForm}>cancel</button>
-                </div>
+            <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">Item Name</InputGroup.Text>
+                <Form.Control
+                placeholder="Username"
+                aria-label="Username"
+                aria-describedby="basic-addon1"
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+                />
+            </InputGroup>
+            <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1 item-description">Item Description </InputGroup.Text>
+                <Form.Control
+                as="textarea"
+                placeholder="Max 255 characters"
+                aria-label="Description"
+                aria-describedby="basic-addon1"
+                value={itemDescription}
+                onChange={(e) => setItemDescription(e.target.value)}
+                />
+                <p></p>
+            </InputGroup>
+            <span > <div className="charactersLeft">{charactersLeft}</div> characters left</span>
+            <InputGroup className="mb-3">
+                <InputGroup.Text id="basic-addon1">Quantity</InputGroup.Text>
+                <Form.Control
+                placeholder="Quantity"
+                aria-label="Quantity"
+                aria-describedby="basic-addon1"
+                value={itemQuantity}
+                onChange={(e) => setItemQuantity(e.target.value)}
+                />
+            </InputGroup>
+            <Button className="" onClick={() => { validateForm() }}>Submit</Button>
+            <button className="btn btn-danger col col-sm-2 m-1" onClick={clearForm}>cancel</button>
+        </div>
         </>
     )
 }

@@ -23,7 +23,7 @@ export const LogOut = () => {
     return (
         <>
             {shouldShowLogout && <>
-                <button className="logout" onClick={() => navigate(`/dashboard/${userName}`)}>Dashboard</button><button className="logout" onClick={handleLogOut}>LOG OUT</button>
+                <Button variant="primary" className="logout btn-sm" onClick={() => navigate(`/dashboard/${userName}`)}>Dashboard</Button><Button variant="dark" className="logout mx-2 btn-sm" onClick={handleLogOut}>LOG OUT</Button>
             </>}
         </>
     )

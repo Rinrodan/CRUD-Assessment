@@ -5,11 +5,11 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/utils/Header';
 import LandingPage from './components/pages/landingPage/landingPage';
 import { createContext, useEffect, useState } from 'react';
-import Dashboard from './components/pages/dashboard/dashboardPage';
 
-import { CompanyProvider } from './contexts/CompanyContext';
-import ParentDisplay from './contexts/ParentDisplay';
+
+
 import EditItemTab from './components/pages/editItemPage';
+import Dashboard from './components/pages/dashboard';
 
 
 

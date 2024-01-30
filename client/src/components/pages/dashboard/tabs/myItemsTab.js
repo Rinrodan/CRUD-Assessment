@@ -10,12 +10,9 @@ import { Button } from 'react-bootstrap';
 
 const MyItemsTab = () => {
         const { userData, updateItemSelectedToEdit } = useContext(UserContext);
-        const user = userData;
-    
-    
         const [inventory, setInventory] = useState([]);
         const [usersInventory, setUsersInventory] = useState([])
-        const [selectedUser, setSelectedUser] = useState([])
+        const user = userData;
         
         let navigate = useNavigate();
         let id = user.id
@@ -30,19 +27,6 @@ const MyItemsTab = () => {
             filterInventoryByUserID(id);
            }
 
-           const [smShow, setSmShow] = useState(false);
-           const [lgShow, setLgShow] = useState(false);
-       
-    //        const handleSetItem = (e) => {
-    //            const inputID = e.target.value
-    //            fetchItemToEdit(inputID)
-    //            setLgShow(true)
-    //    console.log("inputID from modal Button",inputID)
-    //        }
-    //        const handleClose = () => {
-    //            setLgShow(false)
-       
-    //        }
 
         const fetchInventory = useCallback(async () => {
             if(user.username){
@@ -76,10 +60,6 @@ const MyItemsTab = () => {
             if(myInventory.length > 0){
                 return (
                     <>
-     
-
-                    
-                    
                     <div className='items-list-container' id='items-list-container'>
                         <div className='container-sm'>
                             <button className='btn btn-secondary' onClick={handleRefresh}>refresh your item list</button>
@@ -105,14 +85,12 @@ const MyItemsTab = () => {
                                 <div className='button-col'>
                                 <Button variant="primary" onClick={() => {updateItemSelectedToEdit(item); navigate(`/items/:${item.id}`)}}>
                                     Edit
-                                    </Button>
+                                </Button>
                                 </div>
                                 </li>
                             ))}
                             </ul>
                         </div>
-    
-                    
                     </div>
                     </>
                 )
@@ -121,13 +99,9 @@ const MyItemsTab = () => {
                 return (
                     <>
                     <div className='items-list-container container'>
-                    <div className='container-sm'>
+                        <div className='container-sm'>
                             <button className='btn btn-secondary' onClick={handleRefresh}>refresh your item list</button>
                         </div>
-                    </div>
-   
-                    <div className='items-list-container' id='items-list-container'>
-            
                         <div id='employee-filtered-inventory' className='authorized-inventory-list' title='Employee Inventory List' role="list">
                             <div className='employee-name'> Items added by: <span className='h3'> You</span></div>
                             <ul>

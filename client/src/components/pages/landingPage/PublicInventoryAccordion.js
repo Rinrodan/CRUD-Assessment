@@ -76,14 +76,6 @@ const PublicInventoryAccordion = () => {
                                         <td className="type-column">Quantity:</td>
                                         <td className="data-column">{item.item_quantity}</td>
                                     </tr>
-                            
-                                       
-                                
-                                    <tr className="float-end">
-                                        <td>
-                                        <div className="btn btn-secondary" disabled>edit item</div>
-                                        </td>
-                                    </tr>
                               </tbody>
                                 </table>
                            
@@ -91,8 +83,6 @@ const PublicInventoryAccordion = () => {
                         </Accordion.Item>))}
                         </Accordion>
                     </div>
-                    
-            
             );
         } else {
             // console.log("inventory is empty");
@@ -100,23 +90,11 @@ const PublicInventoryAccordion = () => {
         }
     };
      
-    
-
-
-
-    
-    
-
     return (
-    <>
-     
+        <>
         <button className="btn btn-dark" onClick={handleClick}>Our Inventory</button>
- 
         <InventoryTable />
-
-</>
-        
+        </>
     )
-
 }
 export default PublicInventoryAccordion

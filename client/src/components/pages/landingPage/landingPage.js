@@ -1,7 +1,4 @@
-import PublicInventory from "./PublicInventory"
 import PublicInventoryaccordion from "./PublicInventoryAccordion"
-
-
 
 const LandingPage = () => {
     return(

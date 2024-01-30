@@ -1,7 +1,11 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../App";
-import InventoryTabs from "./InventoryTabs";
+
 import { Navigate, useNavigate } from 'react-router-dom';
+import InventoryTabs from "./tabs/inventoryTabs";
+
+
+
 
 const Dashboard = () => {
     const { userData } = useContext(UserContext);
@@ -16,13 +20,10 @@ const Dashboard = () => {
     return (
         <>
         <div >
-        {(user.first_name) && <div className="page">
-            <h1>Welcome Back {user.first_name}</h1>
-            <InventoryTabs />
-
-
-
-        </div>}
+            {(user.first_name) && <div className="page">
+                <h1>Welcome Back {user.first_name}</h1>
+                <InventoryTabs />
+            </div>}
         </div>
         </>
     )
