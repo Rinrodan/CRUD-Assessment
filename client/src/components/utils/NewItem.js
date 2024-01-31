@@ -2,6 +2,7 @@ import { useCallback,  useState } from "react"
 import { Button, Form, InputGroup } from "react-bootstrap"
 import { useContext } from "react";
 import { UserContext } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 
 export const CreateNewItemForm = ({handleNewItemSubmit}) => {
@@ -11,16 +12,16 @@ export const CreateNewItemForm = ({handleNewItemSubmit}) => {
     const [itemQuantity, setItemQuantity] = useState('')
     const { userData } = useContext(UserContext);
     const user = userData;
-
+console.log("CONTEXT user id", user.id)
     const newItem = {
-        item_userid:user.id,
-        item_name:itemName,
-        item_description:itemDescription,
-        item_quantity:itemQuantity
+        item_userid: user.id,
+        item_name: itemName,
+        item_description: itemDescription,
+        item_quantity: itemQuantity
     }
     const clearForm = () => (
-        setItemName('') &&
-        setItemDescription('') &&
+        setItemName(''),
+        setItemDescription(''),
         setItemQuantity('')
     );
     // useEffect(() => {
@@ -113,10 +114,12 @@ export const CreateNewItemForm = ({handleNewItemSubmit}) => {
 }
 
 const CreateNewItem = () => {
-
+    const { userData } = useContext(UserContext);
+    const user = userData;
+    let navigate = useNavigate();
 
     const handleNewItemSubmit = useCallback((newItem) => {
-console.log("handle newitem submit new item",newItem)
+        console.log("handle new item name",newItem.item_name)
         if(newItem){
             fetch(`http://localhost:4400/items`, {
                 method: "POST",
@@ -127,9 +130,8 @@ console.log("handle newitem submit new item",newItem)
                 })
                 .then(res => res.json())
         
-                .then(addedItemResponse => 
-                    alert(`Congrats!!!!  ${addedItemResponse.item_name}has been added.`))
-
+                .then(response => alert(`Congrats!!!!  ${response.item_name}has been added.`) )
+                    .then(() => navigate(`/dashboard/${user.username}`))
             } else {
                 console.log("failed to create new user")
             }

@@ -8,8 +8,9 @@ import { createContext, useEffect, useState } from 'react';
 
 
 
-import EditItemTab from './components/pages/editItemPage';
+// import EditItemTab from './components/pages/editItemPage';
 import Dashboard from './components/pages/dashboard';
+import CreateAccount from './components/utils/newUser';
 
 
 
@@ -57,8 +58,9 @@ console.log("useState item selected to edit",itemSelectedToEdit)
  
           <Routes>
             <Route path="/" element={<LandingPage />}/>
-                <Route path="/dashboard/:username" element={<Dashboard />} />
-                <Route path="/items/:itemid" element={<EditItemTab />} />
+            <Route path="/create-account" element={<CreateAccount/>}/>
+            <Route path="/dashboard/:username" element={<Dashboard />} />
+                {/* <Route path="/items/:itemid" element={<EditItemTab />} /> */}
                   {/* <Route path="/userdashboard/:username/*" element={<UserDashboard />} /> */}
           </Routes>
    

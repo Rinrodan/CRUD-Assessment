@@ -80,7 +80,7 @@ describe('Dashboard Page', () => {
       render(
         <BrowserRouter>
           <UserContext.Provider value={{ userData }}>
-            <InventoryTabs />
+          <Dashboard />
           </UserContext.Provider>
         </BrowserRouter>
       );

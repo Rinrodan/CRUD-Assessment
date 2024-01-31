@@ -56,7 +56,7 @@ const MyItemsTab = () => {
                 .then(requestedItem => {
                     updateItemSelectedToEdit(requestedItem)
         
-                            // console.log("auth inventory server response",requestedItem)
+                            console.log("auth inventory server response",requestedItem)
                 })
                 // .then(setShowTable(true))
                 .catch((err) => console.log(err))
@@ -92,37 +92,22 @@ const MyItemsTab = () => {
               </>
             );
           }
-        // const fetchInventory = useCallback(async () => {
-        //     if(user.username){
-        //         try {
-        //             fetch('http://localhost:4400/inventory', {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Content-Type': 'application/json'
-        //                 }
-        //             })
-        //             .then((res) => res.json())
-        //             .then(items => setInventory(items))
-        //             fetchUsersItems()
-        //             .catch((err) => console.log(err))
-        //         } catch (err) {
-        //             console.log('Failed to fetch items')
-        //         }
-        //     }
-        // }, [])
+
         const fetchUsersInventory = useCallback(async () => {
             if(user.username){
                 try {
-                    fetch(`http://localhost:4400/inventory/${id}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then((res) => res.json())
-                    .then(usersItems => setUsersInventory(usersItems))
-                    
-                    .catch((err) => console.log(err))
+                    const response = await fetch(`http://localhost:4400/inventory/${id}`, {
+                    method: 'GET',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }
+                });
+                const usersItems = await response.json();
+                if (usersItems && usersItems.length > 0) {
+                    setUsersInventory(usersItems);
+                } else {
+                    console.log('No items found');
+                }
                 } catch (err) {
                     console.log('Failed to fetch items')
                 }
@@ -133,63 +118,11 @@ console.log("STATE - inventory",inventory)
 console.log("STATE users inventory",usersInventory)
 
 
-        // const filterInventoryByUserID = useCallback((id) => {
-        //     const filteredItems = inventory.filter(filterByUserId);
-        //     function filterByUserId(item) {
-        //       let requestedID = id;
-        //       return item.item_userid == requestedID;  }
-        //     setUsersInventory(filteredItems)
-        //   }, [inventory]);
         const FilteredInventory = () => {
-
-            // useEffect(() => {
-            //     const fetchData = async () => {
-            //         if(user.username){
-            //             try {
-            //                 fetch(`http://localhost:4400/inventory/${id}`, {
-            //                     method: 'GET',
-            //                     headers: {
-            //                         'Content-Type': 'application/json'
-            //                     }
-            //                 })
-            //                 .then((res) => res.json())
-            //                 .then(usersItems => {
-            //                     setInventory(usersItems)
-            //                             console.log("auth inventory server response",usersItems)
-            //                 })
-            //                 // .then(setShowTable(true))
-            //                 .catch((err) => console.log(err))
-            //             } catch (err) {
-            //                 console.log('Failed to fetch items')
-            //             }
-            //         };}
-            //         fetchData();
-            //     }, []);
-    
-
-        //         try {
-        //             const response = await fetch(`http://localhost:4400/inventory/${id}`, {
-        //             method: 'GET',
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             }
-        //             });
-        //             const usersItems = await response.json();
-        //             setUsersInventory(usersItems);
-        //             console.log("auth inventory server response", usersItems);
-        //         } catch (err) {
-        //             console.log('Failed to fetch items');
-        //         }
-        //         }
-        //     };
-        //     if (user.username) {
-        //         fetchData();
-        //     }
-        //     }
 
 
             
-            if(myInventory){
+            if(myInventory.length > 0){
                 return (
                     <>
                     <div className='items-list-container slide-in-left' id='items-list-container'>
